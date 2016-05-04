@@ -1,4 +1,4 @@
-package zama.learning.ci;
+package demo.codequality;
 
 import java.io.File;
 import java.io.FileInputStream;
