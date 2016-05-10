@@ -7,30 +7,50 @@
 	<name>Code Quality</name>
 
 	<build>
+		<!-- To define the plugin version in your parent POM -->
 		<pluginManagement>
 			<plugins>
 				<plugin>
-					<groupId>org.sonarsource.scanner.maven</groupId>
+					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>sonar-maven-plugin</artifactId>
-					<version>3.0.1</version>
+					<version>2.7.1</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.5.1</version>
 				<configuration>
 					<source>${java.source.version}</source>
 					<target>${java.target.version}</target>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+			</plugin>
 		</plugins>
-	</build> 
+	</build>
 
-	<properties>
-		<java.source.version>1.8</java.source.version>
-		<java.target.version>1.8</java.target.version>
-	</properties>
+	<profiles>
+		<profile>
+			<id>sonar</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>sonar-maven-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+			<properties>
+				<sonar.host.url>http://192.168.0.89:9000/sonar</sonar.host.url>
+				<java.source.version>1.8</java.source.version>
+				<java.target.version>1.8</java.target.version>
+			</properties>
+		</profile>
+	</profiles>
 </project>
